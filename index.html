@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ReproPriority — Copiloto Inteligente de Gestión Reproductiva Ganadera">
+  <meta name="theme-color" content="#10b981">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>ReproPriority — Gestión Reproductiva</title>
+  
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  
+  <div class="app-layout" id="app">
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SIDEBAR (Navegación lateral)                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Logo / Marca -->
+      <div class="sidebar__logo">
+        <div class="sidebar__logo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="sidebar__logo-text">
+          <span class="sidebar__brand">ReproPriority</span>
+          <span class="sidebar__version">v2.0 — Bovinos</span>
+        </div>
+      </div>
+
+      <!-- Selector de Finca -->
+      <div class="sidebar__ranch-selector">
+        <select id="ranch-selector" class="select select--sm" title="Seleccionar finca">
+          <option value="ranch-1">🏡 Hacienda El Roble</option>
+          <option value="ranch-2">🌿 Finca La Esperanza</option>
+        </select>
+      </div>
+
+      <!-- Navegación Principal -->
+      <nav class="sidebar__nav">
+        <a href="#/dashboard" class="sidebar__nav-item active" data-page="dashboard" title="Torre de Control">
+          <span class="sidebar__nav-icon" id="nav-icon-dashboard"></span>
+          <span class="sidebar__nav-label">Torre de Control</span>
+        </a>
+        <a href="#/reproflow" class="sidebar__nav-item" data-page="reproflow" title="ReproFlow (Kanban)">
+          <span class="sidebar__nav-icon" id="nav-icon-kanban"></span>
+          <span class="sidebar__nav-label">ReproFlow</span>
+        </a>
+        <a href="#/animals" class="sidebar__nav-item" data-page="animals" title="Hato (Animales)">
+          <span class="sidebar__nav-icon" id="nav-icon-cow"></span>
+          <span class="sidebar__nav-label">Hato</span>
+        </a>
+        <a href="#/statistics" class="sidebar__nav-item" data-page="statistics" title="Estadísticas">
+          <span class="sidebar__nav-icon" id="nav-icon-chart"></span>
+          <span class="sidebar__nav-label">Estadísticas</span>
+        </a>
+        <a href="#/calendar" class="sidebar__nav-item" data-page="calendar" title="Calendario">
+          <span class="sidebar__nav-icon" id="nav-icon-calendar"></span>
+          <span class="sidebar__nav-label">Calendario</span>
+        </a>
+
+        <div class="sidebar__nav-divider"></div>
+
+        <a href="#/settings" class="sidebar__nav-item" data-page="settings" title="Configuración">
+          <span class="sidebar__nav-icon" id="nav-icon-settings"></span>
+          <span class="sidebar__nav-label">Configuración</span>
+        </a>
+      </nav>
+
+      <!-- Footer del Sidebar -->
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar">JV</div>
+          <div class="sidebar__user-info">
+            <span class="sidebar__user-name">Dr. Juan Vega</span>
+            <span class="sidebar__user-role">Veterinario</span>
+          </div>
+        </div>
+        <button class="btn btn--ghost btn--icon sidebar__collapse-btn" id="sidebar-toggle" title="Colapsar menú">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="11 17 6 12 11 7"/>
+            <polyline points="18 17 13 12 18 7"/>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- CONTENIDO PRINCIPAL                             -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="main-wrapper">
+      <!-- Header Superior -->
+      <header class="header" id="header">
+        <div class="header__left">
+          <button class="btn btn--ghost btn--icon header__mobile-menu" id="mobile-menu-btn" title="Menú">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="header__search-container">
+            <svg class="header__search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="global-search" class="header__search-input" placeholder="Buscar animal por arete o nombre... (Ctrl+K)" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="header__right">
+          <!-- Indicador de Finca Actual -->
+          <div class="header__ranch-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span id="current-ranch-name">Hacienda El Roble</span>
+          </div>
+
+          <!-- Botón Modo Claro/Oscuro -->
+          <button class="btn btn--ghost btn--icon" id="theme-toggle" title="Cambiar tema">
+            <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </button>
+
+          <!-- Notificaciones -->
+          <button class="btn btn--ghost btn--icon header__notification-btn" id="notifications-btn" title="Notificaciones">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="header__notification-badge" id="notification-count">3</span>
+          </button>
+
+          <!-- Botón Acción Rápida -->
+          <button class="btn btn--primary" id="quick-event-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            <span class="header__btn-label">Registrar Evento</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Área de Contenido Dinámico -->
+      <main id="main-content" class="main-content">
+        <!-- El contenido se renderiza dinámicamente aquí por el Router -->
+        <div class="loading-screen">
+          <div class="loading-screen__spinner"></div>
+          <p>Cargando ReproPriority...</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- MODAL GLOBAL                                    -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modal-title">Título</h3>
+        <button class="btn btn--ghost btn--icon modal__close" id="modal-close" title="Cerrar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal__body" id="modal-body">
+        <!-- Contenido dinámico del modal -->
+      </div>
+      <div class="modal__footer" id="modal-footer">
+        <button class="btn btn--secondary" id="modal-cancel">Cancelar</button>
+        <button class="btn btn--primary" id="modal-confirm">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TOAST / NOTIFICACIONES FLOTANTES                -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SCRIPTS (orden de carga importa)                -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <script src="js/data.js"></script>
+  <script src="js/repro-score.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+  <script src="js/pages/reproflow.js"></script>
+  <script src="js/pages/animals.js"></script>
+  <script src="js/pages/statistics.js"></script>
+  <script src="js/pages/calendar.js"></script>
+  <script src="js/pages/settings.js"></script>
+  <script src="js/app.js"></script>
+  
+</body>
+</html>
